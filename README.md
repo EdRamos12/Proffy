@@ -39,8 +39,8 @@ Developed during **[Next Level Week](https://nextlevelweek.com/)**, organized by
 
 You can see more at the web readme.
 
-<img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/screenshot/screenshot_1.png" width="auto" alt="Screenshots" />
-<img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/screenshot/screenshot_2.png" width="auto" alt="Screenshots" />
+<img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/screenshots/screenshot_1.png" width="auto" alt="Screenshots" />
+<img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/screenshots/screenshot_2.png" width="auto" alt="Screenshots" />
 
 ## ⚙️ Technologies
 
