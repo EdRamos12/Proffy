@@ -89,7 +89,7 @@ Check the list for more details about the project.
 - [x] Update classes index
 - [ ] Show classes from user on their profile
 - [ ] Delete/Edit own classes
-- [ ] Delete profile
+- [ ] Delete account
 
 ## 🚀 Running the project
 
