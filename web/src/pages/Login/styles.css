@@ -1,0 +1,211 @@
+#login-page {
+    width: 100vw;
+    height: 100vh;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-background);
+  
+    color: var(--color-text-in-primary);
+}
+
+#login-page-content {
+    display: flex;
+    height: 100%;
+    flex: 1;
+    flex-direction: row;
+}
+
+#login-bg-container {
+    height: 100%;
+    width: 55vw;
+    background: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7.8rem 9.2rem;
+}
+
+#login-bg-items-container {
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/images/bg/form-background.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-bg-container img {
+    text-align: center;
+    width: 100%;
+}
+
+#login-form {
+    width: 45vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16rem;
+    flex-direction: column;
+}
+
+#login-form span {
+    margin: 2.4rem 0;
+    display: block;
+    color: #E33D3D;
+}
+
+#login-form fieldset #Password {
+    margin-top: -10px;
+}
+
+#login-form fieldset #Password input {
+    border-radius: 0px 0px 10px 10px;
+}
+
+#login-form fieldset #Email input {
+    border-radius: 10px 10px 0 0;
+}
+
+#login-form fieldset #login-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px 0;
+}
+
+#login-form fieldset h1 {
+    color: var(--color-text-title);
+    font-family: 'Poppins';
+    margin-bottom: 4rem;
+    font-size: 3.6rem;
+    line-height: 3.6rem;
+    font-weight: 600;
+}
+
+#login-form fieldset .input-block label[for='Email-input'], label[for='Password-input'] {
+    position: absolute;
+    top: 0;
+    font-size: 16px;
+    margin: 16px;
+    margin-top: 34px;
+    line-height: 24px;
+    color: var(--color-text-complement);
+    cursor: text;
+    font-family: 'Poppins';
+    padding: 0 2px;
+    transition: top .1s ease-in-out,  font-size .1s ease-in-out;
+}
+
+#login-form fieldset .input-block label[for='password'] {
+    top: 0px;
+    margin-top: 14px;
+}
+
+#login-form fieldset .input-block #active {
+    top: -16px;
+    font-size: 12px;
+}
+
+#login-form fieldset .input-block label[for="remember_me"], #forgot-password {
+    font: 1.4rem 'Poppins';
+    color: var(--color-text-complement);
+}
+
+#forgot-password {
+    text-align: right;
+    width: auto;
+}
+
+#login-form fieldset .input-block label[for="remember_me"] {
+    margin-left: .8rem;
+}
+
+label[for="remember_me"] {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    color: #9C98A6;
+}
+
+/* #remember-me {
+    display: inline-block;
+    background: var(--color-box-footer);
+    border: 1px solid var(--color-line-in-white);
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 24px;
+    height: 24px;
+    font-size: 22px;
+} */
+
+/* input[name="remember_me"] {
+    display: none;
+} */
+
+#login-form fieldset {
+    border: none;
+    width: 100%;
+    display: flex;
+}
+
+#login-form fieldset .input-block input {
+    height: 7.2rem;
+}
+
+#login-form fieldset button {
+    margin: 4rem 0;
+    padding: 1.6rem 0;
+    text-align: center;
+    width: 100%;
+    border-radius: .8rem;
+    height: 5.6rem;
+    border: none;
+    font: 1.6rem 'Archivo';
+    line-height: 2.6rem;
+    font-weight: 600;
+    background: var(--color-secundary);
+    color: var(--color-box-base);
+}
+
+#login-form fieldset button:hover {
+    background: var(--color-secundary-dark);
+    cursor: pointer;
+}
+
+#login-form fieldset button:disabled {
+    cursor: context-menu;
+    background: var(--color-shapes-disabled);
+    color: var(--color-text-base);
+}
+
+#login-form footer {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    font: 1.6rem 'Poppins';
+    color: var(--color-text-base);
+    bottom: 2rem;
+    left: calc(55vw + 16rem);
+    right: 16rem;
+}
+
+#login-form footer a {
+    font: 1.6rem 'Archivo';
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+#login-form #footer-right-content {
+    font: 1.2rem 'Poppins';
+    color: var(--color-text-complement);
+    line-height: 2rem;
+    font-weight: normal;
+}

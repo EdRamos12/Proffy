@@ -1,0 +1,207 @@
+#register-page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--color-background);
+  color: var(--color-text-in-primary);
+}
+
+#register-page-content {
+  display: flex;
+  height: 100%;
+  flex: 1;
+  flex-direction: row;
+}
+
+#not-show {
+  display: none;
+  width: 0px;
+  overflow: hidden;
+  padding: 0px;
+}
+
+#register-bg-container {
+  height: 100%;
+  width: 55vw;
+  background: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7.8rem 9.2rem;
+}
+
+#register-bg-container #register-bg-items-container {
+  text-align: center;
+  width: 100%;
+  background: url("../../assets/images/bg/form-background.svg");
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+#register-bg-container #register-bg-items-container div {
+  display: flex;
+  width: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+}
+
+#register-bg-container #register-bg-items-container div img {
+  width: 100%;
+}
+
+#register-bg-container #register-bg-items-container div h2 {
+  font-weight: 500;
+  font-size: 2.4rem;
+  margin: 0;
+  margin-top: 1.2rem;
+  text-align: left;
+  align-self: end;
+}
+
+#register-form {
+  width: 45vw;
+  display: flex;
+  padding: 16rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#register-form fieldset span {
+  margin-top: 2.4rem;
+  display: block;
+  color: #e33d3d;
+}
+
+#register-form fieldset .input-block input {
+  height: 7.2rem;
+}
+
+#register-form fieldset #Password,
+#Email,
+#Last-name {
+  margin-top: -10px;
+}
+
+#register-form fieldset #Password input {
+  border-radius: 0px 0px 10px 10px;
+}
+
+#register-form fieldset #First-name input {
+  border-radius: 10px 10px 0 0;
+}
+
+#register-form fieldset #Email input,
+#Last-name input {
+  border-radius: 0px;
+}
+
+#register-form fieldset h1 {
+  color: var(--color-text-title);
+  font-family: "Poppins";
+  margin-bottom: 2.1rem;
+  font-size: 3.6rem;
+  line-height: 3.6rem;
+  font-weight: 600;
+}
+
+#register-form fieldset .input-block label[for="Email-input"],
+label[for="Password-input"],
+label[for="First-name-input"],
+label[for="Last-name-input"] {
+  position: absolute;
+  top: 0;
+  font-size: 16px;
+  margin: 16px;
+  margin-top: 34px;
+  line-height: 24px;
+  color: var(--color-text-complement);
+  cursor: text;
+  font-family: "Poppins";
+  padding: 0 2px;
+  transition: top 0.1s ease-in-out, font-size 0.1s ease-in-out;
+}
+
+#register-form-content label[for="password"] {
+  top: 0px;
+  margin-top: 14px;
+}
+
+#page-form-content #description {
+  padding-bottom: 4rem;
+}
+
+#register-form fieldset .input-block #active {
+  top: -16px;
+  font-size: 12px;
+}
+
+#register-form fieldset {
+  border: none;
+  display: flex;
+  flex: 1;
+}
+
+#register-page-content #go-back {
+  position: absolute;
+  top: 1.6rem;
+  left: 16rem;
+}
+
+#register-form-header #description {
+  color: var(--color-text-base);
+  font-family: "Poppins", "sans-serif";
+}
+
+#register-form-header {
+  margin-bottom: 4rem;
+}
+
+#register-form fieldset button,
+#success-content a {
+  margin: 4rem 0;
+  padding: 1.6rem 0;
+  text-align: center;
+  width: 100%;
+  height: 5.6rem;
+  border-radius: 0.8rem;
+  border: none;
+  font: 1.6rem "Archivo";
+  line-height: 2.6rem;
+  font-weight: 600;
+  background: var(--color-secundary);
+  color: var(--color-box-base);
+}
+
+#success-content a {
+  width: auto;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  margin-top: 8rem;
+}
+
+#register-form fieldset button:hover {
+  background: var(--color-secundary-dark);
+  cursor: pointer;
+}
+
+#register-form fieldset button:disabled {
+  cursor: context-menu;
+  background: var(--color-shapes-disabled);
+  color: var(--color-text-base);
+}

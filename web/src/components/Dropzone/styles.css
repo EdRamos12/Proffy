@@ -1,0 +1,8 @@
+.dropzone {
+    width: 18rem;
+    outline: none;
+}
+
+.dropzone span {
+    cursor: pointer;
+}
