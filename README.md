@@ -13,7 +13,7 @@
   
   <img alt="License" src="https://img.shields.io/github/license/edramos12/Proffy">
   
-  <img alt="Size" src="https://img.shields.io/github/repo-size/edramos12/Proffy">
+  <img alt="Size" src="https://img.shields.io/github/languages/code-size/edramos12/proffy">
    
   <img alt="Status" src="https://img.shields.io/badge/repo%20status-WIP-yellow">
 </p>
