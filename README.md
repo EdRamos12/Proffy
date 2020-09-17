@@ -119,7 +119,7 @@ $ cd proffy
 
 ```bash
 # Go to back-end folder
-$ cd backend
+$ cd server
 
 # Install dependencies (You can either use yarn or npm as package manager)
 $ yarn # or 'npm i'
