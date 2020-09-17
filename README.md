@@ -9,11 +9,11 @@
 
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/edramos12/proffy">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/edramos12/Proffy">
   
-  <img alt="License" src="https://img.shields.io/github/license/edramos12/proffy">
+  <img alt="License" src="https://img.shields.io/github/license/edramos12/Proffy">
   
-  <img alt="Size" src="https://img.shields.io/github/repo-size/edramos12/proffy">
+  <img alt="Size" src="https://img.shields.io/github/repo-size/edramos12/Proffy">
    
   <img alt="Status" src="https://img.shields.io/badge/repo%20status-WIP-yellow">
 </p>
