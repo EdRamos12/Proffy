@@ -136,8 +136,7 @@ API address: [http://localhost:3333/](http://localhost:3333/).
 
 <blockquote> 
 	<h3>💡 Note</h3>
-	To run the web application, the back-end is necessary to be active <br> 
-	And set up the .env located at "web/.env"
+	To run the web application, the back-end is necessary to be active.
 </blockquote>
 
 ```bash
