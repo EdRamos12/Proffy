@@ -1,6 +1,6 @@
 # ⚠️ IMPORTANT!
 
-If you want to change api's host for the front-end, you will need to go to ``src/services/api.ts`` and change it there.
+### If you want to change api's host for the front-end, you will need to go to ``src/services/api.ts`` and change it there.
 
 ## 📸 Screenshots
 
