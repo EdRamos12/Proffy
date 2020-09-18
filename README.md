@@ -5,7 +5,7 @@
   <img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/logo.png" width="auto" alt="Proffy" />
 </h1>
 
-<p align="center">An open source React/Express application made in <a href="https://github.com/fireship-io/223-electron-screen-recorder">Rocketseat's Next Level Week</a></p>
+<p align="center">An open source React/Express application made in <a href="https://nextlevelweek.com">Rocketseat's Next Level Week</a></p>
 
 
 <p align="center">
