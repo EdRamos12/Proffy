@@ -1,6 +1,3 @@
-
-
-
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/logo.png" width="auto" alt="Proffy" />
 </h1>
