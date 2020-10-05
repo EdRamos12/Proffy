@@ -32,17 +32,12 @@ export default function Login() {
     }
     
     useEffect(() => {
-        if (error !== '') {
-            setError('');
-        }
-    }, [email, password, error])
+        setError('');
+    }, [email, password])
 
     return (
         <div id="login-page">
             <div id="login-page-content">
-                {/* <div id="login-bg-container">
-                    <img src={loginBackground} alt="Proffy" />
-                </div> */}
                 <div id="login-bg-container">
                     <div id="login-bg-items-container">
                         <div>

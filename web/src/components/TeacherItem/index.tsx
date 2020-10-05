@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import './styles.css'
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import trashIcon from '../../assets/images/icons/trash.svg';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../contexts/AuthContext';
 
 interface Schedule {
     week_day: number;
@@ -104,24 +106,40 @@ const ScheduleItem: React.FC<ScheduleProps> = ({ schedule, week_day, ...rest }) 
 }
 
 const TeacherItem: React.FC<teacherItemProps> = ({ teacher }) => {
+    const { user } = useContext(AuthContext);
+
     function createConnection() {
         api.post('/connections', {
             user_id: teacher.user_id
-        }, {withCredentials: true})
+        }, {withCredentials: true});
     }
 
-    //const result = searchSchedule(teacher.schedule, sortedSchedule);
+    async function handleDelete() {
+        const result = window.confirm('Are you sure you want to delete your class?');
+        if (result) {
+            await api.delete('/classes/'+teacher.id, {withCredentials: true});
+            alert('Class deleted.');
+            window.location.reload();
+        }
+    }
 
     return (
         <article className="teacher-item">
             <header>
-                <img src={teacher.avatar} alt="" />
+                <Link to={`/profile/${teacher.user_id}`}>
+                    <img src={teacher.avatar} alt="" />
+                </Link>
                 <div>
                     <Link to={`/profile/${teacher.user_id}`}><strong>{teacher.name}</strong></Link>
                     <span>{teacher.subject}</span>
                 </div>
+                { user?.id === teacher.user_id && 
+                    <button id='can-edit' onClick={handleDelete}>
+                        <img src={trashIcon} alt="Delete" />
+                    </button>
+                }
             </header>
-            <p>{teacher.bio}</p>
+            <p>{teacher.bio}, {teacher.id}</p>
             <div id="schedules">
                 <div className="top-container">
                     <ScheduleItem schedule={teacher.schedule} week_day={0} />

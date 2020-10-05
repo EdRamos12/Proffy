@@ -23,7 +23,7 @@ interface User {
 
 export default function Profile() {
     const { user } = useContext(AuthContext);
-    const { id = user?.id } = useParams();
+    const { id = user?.id } = useParams() as any;
 
     const [userProfile, setUserProfile] = useState<User>({} as User);
     const [canEdit, setCanEdit] = useState(false);

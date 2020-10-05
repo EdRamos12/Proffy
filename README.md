@@ -1,19 +1,16 @@
-
-
-
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/logo.png" width="auto" alt="Proffy" />
 </h1>
 
-<p align="center">Open source React/Express application made in <a href="https://github.com/fireship-io/223-electron-screen-recorder">Rocketseat's Next Level Week</a></p>
+<p align="center">An open source React/Express application made in <a href="https://nextlevelweek.com">Rocketseat's Next Level Week</a></p>
 
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/edramos12/proffy">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/edramos12/Proffy">
   
-  <img alt="License" src="https://img.shields.io/github/license/edramos12/proffy">
+  <img alt="License" src="https://img.shields.io/github/license/edramos12/Proffy">
   
-  <img alt="Size" src="https://img.shields.io/github/repo-size/edramos12/proffy">
+  <img alt="Size" src="https://img.shields.io/github/languages/code-size/edramos12/proffy">
    
   <img alt="Status" src="https://img.shields.io/badge/repo%20status-WIP-yellow">
 </p>
@@ -39,8 +36,8 @@ Developed during **[Next Level Week](https://nextlevelweek.com/)**, organized by
 
 You can see more at the web readme.
 
-<img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/screenshot/screenshot_1.png" width="auto" alt="Screenshots" />
-<img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/screenshot/screenshot_2.png" width="auto" alt="Screenshots" />
+<img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/screenshots/screenshot_1.png" width="auto" alt="Screenshots" />
+<img src="https://raw.githubusercontent.com/EdRamos12/proffy/master/img/screenshots/screenshot_2.png" width="auto" alt="Screenshots" />
 
 ## ⚙️ Technologies
 
@@ -73,7 +70,7 @@ Check the list for more details about the project.
 - [x] List specific user
 - [x] Delete user
 - [x] Edit/Delete own classes
-- [ ] List classes from specific user 
+- [x] List classes from specific user 
 
 ### 💻 Front-end
 
@@ -89,7 +86,7 @@ Check the list for more details about the project.
 - [x] Update classes index
 - [ ] Show classes from user on their profile
 - [ ] Delete/Edit own classes
-- [ ] Delete profile
+- [ ] Delete account
 
 ## 🚀 Running the project
 
@@ -119,7 +116,7 @@ $ cd proffy
 
 ```bash
 # Go to back-end folder
-$ cd backend
+$ cd server
 
 # Install dependencies (You can either use yarn or npm as package manager)
 $ yarn # or 'npm i'
@@ -136,8 +133,7 @@ API address: [http://localhost:3333/](http://localhost:3333/).
 
 <blockquote> 
 	<h3>💡 Note</h3>
-	To run the web application, the back-end is necessary to be active <br> 
-	And set up the .env located at "web/.env"
+	To run the web application, the back-end is necessary to be active.
 </blockquote>
 
 ```bash

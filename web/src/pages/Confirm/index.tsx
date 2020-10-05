@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import api from '../../services/api';
 
 export default function Confirm() {
-    const { token } = useParams();
+    const { token } = useParams() as any;
     const history = useHistory();
 
     useEffect(() => {

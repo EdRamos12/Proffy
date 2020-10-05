@@ -28,18 +28,22 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
                 </div>
             </div>
             <div className="header-content">
-                <div className={ Boolean(props.title) ? "header-container" : "not-show" }>
-                    <div className={ Boolean(props.title) ? "title-container" : "not-show" }>
-                        <strong>{props.title}</strong>
-                        { props.description && <p>{ props.description }</p> }
+                { Boolean(props.title) &&
+                    <div className="header-container">
+                        <div className="title-container">
+                            <strong>{props.title}</strong>
+                            { props.description && <p>{ props.description }</p> }
+                        </div>
+                        { Boolean(props.info) &&
+                            <div className="info-container">
+                                { props.icon && <img src={props.icon} alt=""/> }
+                                <p>
+                                    { props.info }
+                                </p>
+                            </div>
+                        }
                     </div>
-                    <div className={ Boolean(props.info) ? "info-container" : "not-show" }>
-                        { props.icon && <img src={props.icon} alt=""/> }
-                        <p>
-                            { props.info }
-                        </p>
-                    </div>
-                </div>
+                }
                 {props.children}
             </div>
         </header>
