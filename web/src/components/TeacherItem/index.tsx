@@ -139,7 +139,7 @@ const TeacherItem: React.FC<teacherItemProps> = ({ teacher }) => {
                     </button>
                 }
             </header>
-            <p>{teacher.bio}, {teacher.id}</p>
+            <p>{teacher.bio}</p>
             <div id="schedules">
                 <div className="top-container">
                     <ScheduleItem schedule={teacher.schedule} week_day={0} />
