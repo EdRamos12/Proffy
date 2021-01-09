@@ -52,7 +52,7 @@ const TeacherList = () => {
     const checkChunkedPosts = useMemo(() => async function a() {
         if (storedPosts !== null && storedPosts !== teachers) {
             //console.log(storedPosts, teachers)
-            setPage(storedPage+1);
+            setPage(storedPage + 1);
             setTeachers(storedPosts as never[]);
             //console.log('is it?', teachers);
         } else {
@@ -70,6 +70,19 @@ const TeacherList = () => {
             setLoading(true);
         }
     }, [storedPosts, storedPage, teachers]);
+
+    useEffect(() => {
+        const params = paramsToObject(window.location.search);
+        if (!params.subject && !params.week_day && !params.time) {
+            window.history.pushState({}, "", "");
+            console.log("wow")
+            setTeachers([]);
+            setPage(1);
+            setSearch(false);
+            chunkInfo(1, []);
+            setLoading(true);
+        }
+    }, [window.location.search]);
 
     useEffect(() => {
         api.get('/total_classes', { withCredentials: true }).then((info) => {
