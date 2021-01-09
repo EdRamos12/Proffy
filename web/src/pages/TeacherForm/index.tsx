@@ -123,7 +123,7 @@ function TeacherForm() {
 
                     </fieldset>
 
-                    <fieldset className="schedule-item">
+                    <fieldset>
                         <legend>Available time <button type="button" onClick={addNewScheduleItem}>+ New time</button></legend>
 
                         {scheduleItems.map((scheduleItem, index) => {

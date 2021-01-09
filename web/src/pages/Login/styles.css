@@ -153,7 +153,7 @@ label[for="remember_me"] {
 #login-form fieldset {
     border: none;
     width: 100%;
-    display: flex;
+    /*display: flex;*/
 }
 
 #login-form fieldset .input-block input {

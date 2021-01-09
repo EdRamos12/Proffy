@@ -4,6 +4,7 @@ import Routes from './routes';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { AuthProvider } from './contexts/AuthContext';
+import { PostStorageProvider } from './contexts/PostStorage';
 
 const history = createBrowserHistory();
 
@@ -11,7 +12,9 @@ function App() {
   return (
     <Router history={history}>
       <AuthProvider>
-        <Routes />
+        <PostStorageProvider>
+          <Routes />
+        </PostStorageProvider>
       </AuthProvider>
     </Router>
   );

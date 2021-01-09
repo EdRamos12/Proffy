@@ -149,7 +149,7 @@ label[for="Last-name-input"] {
 
 #register-form fieldset {
   border: none;
-  display: flex;
+  /*display: flex;*/
   flex: 1;
 }
 

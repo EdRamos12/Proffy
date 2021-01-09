@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect, useMemo } from 'react';
+import React, { useState, FormEvent, useEffect, useMemo, useContext } from 'react';
 import './styles.css'
 import PageHeader from '../../components/PageHeader';
 import TeacherItem, { Teacher } from '../../components/TeacherItem';
@@ -6,21 +6,36 @@ import Input from '../../components/Input';
 import Select from '../../components/Select';
 import SmileIcon from '../../assets/images/icons/smile.svg';
 import api from '../../services/api';
+import PostStorage from '../../contexts/PostStorage';
+
+function paramsToObject(params: any) {
+    const urlParams = new URLSearchParams(params);
+    return Object.fromEntries(urlParams);
+}
 
 const TeacherList = () => {
+    // load chunked posts
+    const { storedPage, chunkInfo, storedPosts } = useContext(PostStorage);
+
+    //actual posts
     const [teachers, setTeachers] = useState([]);
 
+    // general values
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
     const [totalClasses, setTotalClasses] = useState('.....');
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState(false);
 
+    // search thing
     const [subject, setSubject] = useState('');
     const [week_day, setWeekDay] = useState('');
     const [time, setTime] = useState('');
 
+    // no more posts to load
     const [limitReached, setLimitReached] = useState(false);
+
+    // scroll value 
     const [bottomPageValue, setBottomPageValue] = useState(0);
 
     async function makeSearch(e: FormEvent) {
@@ -34,26 +49,37 @@ const TeacherList = () => {
         setLoading(true);
     }
 
+    const checkChunkedPosts = useMemo(() => async function a() {
+        if (storedPosts !== null && storedPosts !== teachers) {
+            //console.log(storedPosts, teachers)
+            setPage(storedPage+1);
+            setTeachers(storedPosts as never[]);
+            //console.log('is it?', teachers);
+        } else {
+            if (window.location.search) {
+                console.log('about that')
+                const params = paramsToObject(window.location.search);
+                if (!!params.subject && !!params.week_day && !!params.time) {
+                    setSubject(params.subject.replace('%20', ' '));
+                    setWeekDay(params.week_day);
+                    setTime(params.time);
+                    setSearch(true);
+                }
+            }
+            //initial page load
+            setLoading(true);
+        }
+    }, [storedPosts, storedPage, teachers]);
+
     useEffect(() => {
-        api.get('/total_classes', {withCredentials: true}).then((info) => {
+        api.get('/total_classes', { withCredentials: true }).then((info) => {
             setTotalClasses(info.data.total);
         });
 
-        if (window.location.search) {
-            const searchInfo = window.location.search.replace('?', '').split('&').map((value) => value.split('='));
-            if (searchInfo.length === 3) {
-                console.log(searchInfo.indexOf(['subject']));
-                if (searchInfo[0].length === 2 && searchInfo[0].includes('subject')) setSubject(searchInfo[0][1].replace('%20', ' '));
-                if (searchInfo[1].length === 2 && searchInfo[1].includes('week_day')) setWeekDay(searchInfo[1][1]);
-                if (searchInfo[2].length === 2 && searchInfo[2].includes('time')) setTime(searchInfo[2][1]);
-                setSearch(true);
-            }
-        }
-
-        setLoading(true);
+        checkChunkedPosts();
 
         function handleScroll() {
-            if (window.innerHeight + document.documentElement.scrollTop < document.documentElement.scrollHeight-700) return;
+            if (window.innerHeight + document.documentElement.scrollTop < document.documentElement.scrollHeight - 700) return;
             if (bottomPageValue === document.documentElement.scrollHeight) return;
             setBottomPageValue(document.documentElement.scrollHeight);
             setLoading(true);
@@ -81,7 +107,7 @@ const TeacherList = () => {
                     subject,
                     week_day,
                     time
-                }, 
+                },
                 withCredentials: true
             });
             if (page === 1) {
@@ -93,7 +119,7 @@ const TeacherList = () => {
             response = await api.get('/classes', {
                 params: {
                     page,
-                }, 
+                },
                 withCredentials: true
             });
             setTeachers([...teachers, ...response.data] as any);
@@ -103,22 +129,24 @@ const TeacherList = () => {
             setLimitReached(true);
             return;
         }
-        setPage(page+1);
+        setPage(page + 1);
         setLoading(false);
         setTotal(response.headers['x-total-count']);
+        chunkInfo(page, [...teachers, ...response.data]);
+        console.log(page);
         return;
-    }, [limitReached, search, subject, time, week_day, page, teachers, total]);
+    }, [limitReached, search, subject, time, week_day, page, teachers, total, chunkInfo]);
 
     useEffect(() => {
         if (!loading) return;
         loadClasses();
     }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
-    
+
     return (
         <div id="page-teacher-list" className="container">
             <PageHeader icon={SmileIcon} info={`We have ${totalClasses} total classes.`} title="These are the available teachers." page="Study">
                 <form id="search-teachers" onSubmit={makeSearch}>
-                    <Select value={subject} onChange={(e) => {setSubject(e.target.value)}} required name="subject" label="School subject" options={[
+                    <Select value={subject} onChange={(e) => { setSubject(e.target.value) }} required name="subject" label="School subject" options={[
                         { value: 'Art', label: 'Art' },
                         { value: 'Biology', label: 'Biology' },
                         { value: 'Chemistry', label: 'Chemistry' },
@@ -131,7 +159,7 @@ const TeacherList = () => {
                         { value: 'Philosophy', label: 'Philosophy' },
                         { value: 'Sociology', label: 'Sociology' },
                     ]} />
-                    <Select value={week_day} onChange={(e) => {setWeekDay(e.target.value)}} required name="week_day" label="Day of the week" options={[
+                    <Select value={week_day} onChange={(e) => { setWeekDay(e.target.value) }} required name="week_day" label="Day of the week" options={[
                         { value: '0', label: 'Sunday' },
                         { value: '1', label: 'Monday' },
                         { value: '2', label: 'Tuesday' },
@@ -140,7 +168,7 @@ const TeacherList = () => {
                         { value: '5', label: 'Friday' },
                         { value: '6', label: 'Saturday' },
                     ]} />
-                    <Input value={time} onChange={(e) => {setTime(e.target.value)}} required type="time" name="time" label="Time of the day" />
+                    <Input value={time} onChange={(e) => { setTime(e.target.value) }} required type="time" name="time" label="Time of the day" />
                     <button type="submit">Search</button>
                 </form>
             </PageHeader>
@@ -149,8 +177,8 @@ const TeacherList = () => {
                     return <TeacherItem key={index} teacher={teacher} />;
                 })}
                 <span id="limit-message">
-                    {limitReached && 'These are all the results' }
-                    {loading && 'Loading...'} <br /> 
+                    {limitReached && 'These are all the results'}
+                    {loading && 'Loading...'} <br />
                     {total === 0 && limitReached ? 'No teacher Found.' : ''}
                 </span>
             </main>

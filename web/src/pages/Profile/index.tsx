@@ -80,14 +80,14 @@ export default function Profile() {
 			data.append('avatar', selectedFile);
         }
         try {
-            const info = await api.put('profile', data, {
+            await api.put('profile', data, {
                 withCredentials: true, 
                 onUploadProgress: (event) => {
                     setUploadProgress(Math.round((100 * event.loaded) / event.total));
                 }
             })
-            window.history.pushState({}, "", `/profile/${user?.id}#success=${info.statusText}`);
-            window.location.reload(true);
+            alert('Profile updated!');
+            setUploadProgress(0);
         } catch (err) {
             window.history.pushState({}, "", `/profile/${user?.id}#success=ERR`);
             if (err.response.status === 429) {

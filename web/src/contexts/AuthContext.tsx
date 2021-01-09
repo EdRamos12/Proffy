@@ -35,7 +35,6 @@ export const AuthProvider: React.FC = ({ children }) => {
                 password,
                 remember_me: rememberMe,
             }, { withCredentials: true });
-
             setUser(info.data);
             return true;
         } catch (error) {
