@@ -36,7 +36,7 @@ export default class ClassesController {
         if (offset < 0) {
             return rsp.json([]);
         }
-        console.log(filters.user_id);
+        //console.log(filters.user_id);
         if (filters.user_id) {
             const { total } = (await db('classes').where('classes.user_id', '=', String(filters.user_id)).count('* as total'))[0]; 
             const index = Number(total) - (Number(total) % 5); 
@@ -74,6 +74,11 @@ export default class ClassesController {
             return rsp.json(classes_items);
         }
         if (!filters.subject || !filters.week_day || !filters.time) {
+            if (offset % 5 == 0) {
+                offset -= 5;
+            }
+            console.log(String(offset)[String(offset).length - 1]);
+
             const classes_items = (await db('classes')
                 .join('users', 'classes.user_id', '=', 'users.id')
                 .join('profile', 'classes.user_id', '=', 'profile.user_id')
@@ -123,7 +128,6 @@ export default class ClassesController {
         if (offset < 0) {
             return rsp.json([]);
         }
-        console.log(offset);
 
         const classes = await db('classes')
             .whereExists(function () {
@@ -290,5 +294,20 @@ export default class ClassesController {
         const { total } = totalClasses[0];
 
         return rsp.json({ total });
+    }
+
+    async index_one(rq: Request, rsp: Response) {
+        const { id } = rq.params;
+
+        const classes = await await db('classes')
+        .join('users', 'classes.user_id', '=', 'users.id')
+        .join('profile', 'classes.user_id', '=', 'profile.user_id')
+        .where('classes.id', '=', Number(id))
+        .select('classes.*', 'users.name', 'users.id as user_id', 'profile.avatar', 'profile.whatsapp', 'profile.bio');
+
+        if (classes.length == 0)
+            return rsp.status(400).send({ message: 'Invalid Id' });
+
+        return rsp.json(classes);
     }
 }

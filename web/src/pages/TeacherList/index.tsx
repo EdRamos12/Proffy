@@ -71,24 +71,26 @@ const TeacherList = () => {
         }
     }, [storedPosts, storedPage, teachers]);
 
-    useEffect(() => {
-        const params = paramsToObject(window.location.search);
-        if (!params.subject && !params.week_day && !params.time) {
-            window.history.pushState({}, "", "");
-            console.log("wow")
-            setTeachers([]);
-            setPage(1);
-            setSearch(false);
-            chunkInfo(1, []);
-            setLoading(true);
-        }
-    }, [window.location.search]);
+    // TODO: Maker another algorithm to cancel search
+    // useEffect(() => {
+    //     const params = paramsToObject(window.location.search);
+    //     if (!window.location.pathname.includes("study")) return;
+    //     if (!params.subject && !params.week_day && !params.time) {
+    //         //window.history.pushState({}, "", "");
+    //         console.log("wow")
+    //         setTeachers([]);
+    //         setPage(1);
+    //         setSearch(false);
+    //         chunkInfo(1, []);
+    //         setLoading(true);
+    //     }
+    // }, [window.location.search]);
 
     useEffect(() => {
         api.get('/total_classes', { withCredentials: true }).then((info) => {
             setTotalClasses(info.data.total);
         });
-
+        console.log('aah')
         checkChunkedPosts();
 
         function handleScroll() {

@@ -8,6 +8,7 @@ import UserController from './controllers/UserController';
 import ProfileController from './controllers/ProfileController';
 import authMiddleware from './utils/auth';
 import rateLimit from 'express-rate-limit';
+import ClassCommentsController from './controllers/ClassCommentsController';
 
 const routes = express.Router();
 const upload = multer(multerConfig);
@@ -15,6 +16,7 @@ const classesController = new ClassesController();
 const connectionsController = new ConnectionsController();
 const userController = new UserController();
 const profileController = new ProfileController();
+const classCommentsController = new ClassCommentsController();
 
 const uploadLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -32,13 +34,14 @@ const classesListingLimiter = rateLimit({
     }
 });
 
-const verifyLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 1000,
-    handler: (_, rsp) => {
-        rsp.status(429).send({ message: 'You are being rate limited, please try again later.' })
-    }
-});
+// TODO: some better system or amount of rate to replace
+// const verifyLimiter = rateLimit({
+//     windowMs: 15 * 60 * 1000, // 15 minutes
+//     max: 1000,
+//     handler: (_, rsp) => {
+//         rsp.status(429).send({ message: 'You are being rate limited, please try again later.' })
+//     }
+// });
 
 ///////////////////////////////////////////////////////////////
 
@@ -58,7 +61,7 @@ routes.post('/authenticate', celebrate({
     })
 }, {abortEarly: false}), userController.authenticate);
 
-routes.get('/verify', verifyLimiter, authMiddleware, userController.verify);
+routes.get('/verify', authMiddleware, userController.verify);
 
 routes.post('/forgot_password', celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -102,6 +105,14 @@ routes.get('/classes', classesListingLimiter, authMiddleware, classesController.
 routes.delete('/classes/:id', authMiddleware, classesController.delete);
 
 routes.put('/classes/:id', authMiddleware, classesController.edit);
+
+routes.get('/classes/:id', classesController.index_one);
+
+///////////////////////////////////////////////////////////////
+
+routes.post('/classes/:class_id/comment', authMiddleware, classCommentsController.create);
+
+routes.get('/classes/:class_id/comment', classCommentsController.index);
 
 ///////////////////////////////////////////////////////////////
 

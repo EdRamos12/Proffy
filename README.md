@@ -71,6 +71,8 @@ Check the list for more details about the project.
 - [x] Delete user
 - [x] Edit/Delete own classes
 - [x] List classes from specific user 
+- [x] Index one class
+- [ ] Comments system to post
 
 ### 💻 Front-end
 
@@ -87,6 +89,8 @@ Check the list for more details about the project.
 - [ ] Show classes from user on their profile
 - [ ] Delete/Edit own classes
 - [ ] Delete account
+- [ ] Page to see post & comments
+- [ ] Comment on posts
 
 ## 🚀 Running the project
 
