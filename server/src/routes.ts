@@ -110,9 +110,15 @@ routes.get('/classes/:id', classesController.index_one);
 
 ///////////////////////////////////////////////////////////////
 
-routes.post('/classes/:class_id/comment', authMiddleware, classCommentsController.create);
+routes.post('/classes/:class_id/comment', authMiddleware, celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        content: Joi.string().required() //comment itself
+    })
+}), classCommentsController.create);
 
 routes.get('/classes/:class_id/comment', classCommentsController.index);
+
+routes.delete('/classes/:class_id/comment/:id', authMiddleware, classCommentsController.delete);
 
 ///////////////////////////////////////////////////////////////
 

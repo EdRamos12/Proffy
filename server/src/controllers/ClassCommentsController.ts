@@ -37,4 +37,30 @@ export default class ClassCommentsController {
 
         return rsp.json(comments_post);
     }
+
+    async delete(rq: Request, rsp: Response) {
+        const { class_id, id } = rq.params;
+        
+        const post = await db('classes').where('id', '=', class_id);
+
+        if (post.length == 0) return rsp.status(400).send({ message: 'Invalid Id' });
+
+        const comments_post = await db('class_comment').where('id', '=', id);
+
+        if (comments_post.length == 0) return rsp.status(404).send({ message: 'No comments found' });
+
+        const user_id = rq.userId;
+        console.log(user_id);
+        //console.log(post, comments_post)
+
+        if (user_id !== post[0].user_id || user_id !== comments_post[0].user_id) return rsp.status(400).send({ message: 'Unauthorized' });
+
+        const trx = await db.transaction();
+
+        await trx('class_comment').where('id', '=', id).delete();
+
+        await trx.commit();
+
+        return rsp.send({ message: 'Comment deleted.' })
+    }
 }
