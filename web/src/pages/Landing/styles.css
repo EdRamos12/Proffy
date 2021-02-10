@@ -11,6 +11,10 @@
   background: var(--color-primary);
 }
 
+#root > div {
+  height: 100%;
+}
+
 .logo-container img {
   height: 10rem;
 }

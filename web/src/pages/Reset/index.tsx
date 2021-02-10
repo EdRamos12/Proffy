@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from 'react'
+import React, { useState, FormEvent, useEffect, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import logoImg from '../../assets/images/logo.svg';
 import backIcon from '../../assets/images/icons/back.svg'
@@ -6,7 +6,8 @@ import SuccessContainer from '../../components/SuccessContainer';
 import api from '../../services/api';
 
 export default function Reset () {
-    const { token } = useParams();
+    const { token } = useParams() as any;
+
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
     const [password, setPassword] = useState('');

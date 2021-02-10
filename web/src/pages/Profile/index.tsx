@@ -9,6 +9,8 @@ import Input from '../../components/Input';
 import warningIcon from '../../assets/images/icons/warning.svg';
 import Textarea from '../../components/Textarea';
 import Dropzone from '../../components/Dropzone';
+import NotificationContext from '../../contexts/NotificationContext';
+import { v4 } from 'uuid';
 
 interface User {
     avatar: string;
@@ -24,6 +26,7 @@ interface User {
 export default function Profile() {
     const { user } = useContext(AuthContext);
     const { id = user?.id } = useParams() as any;
+    const dispatch = useContext(NotificationContext);
 
     const [userProfile, setUserProfile] = useState<User>({} as User);
     const [canEdit, setCanEdit] = useState(false);
@@ -86,13 +89,28 @@ export default function Profile() {
                     setUploadProgress(Math.round((100 * event.loaded) / event.total));
                 }
             })
-            alert('Profile updated!');
+            dispatch({
+                type: "ADD_NOTIFICATION",
+                payload: {
+                    type: 'SUCCESS',
+                    message: 'Your profile has been successfully updated.',
+                    title: 'Profile updated!',
+                    id: v4(),
+                }
+            });
             setUploadProgress(0);
         } catch (err) {
-            window.history.pushState({}, "", `/profile/${user?.id}#success=ERR`);
             if (err.response.status === 429) {
                 setUploadProgress(0);
-                alert(err.response.data.message);
+                dispatch({
+                    type: "ADD_NOTIFICATION",
+                    payload: {
+                        type: 'ERROR',
+                        message: err.response.data.message,
+                        title: 'Something went wrong.',
+                        id: v4(),
+                    }
+                });
             }
         }
     }
