@@ -1,16 +1,17 @@
 .notification-wrapper {
     position: fixed;
     top: 20px;
-    left: calc(50vw - 12vw);
+    right: 20px;
     z-index: 200;
+    transition: height .2s ease-out;
 }
 
 .notification {
     box-shadow: 0 0 10px rgba(0,0,0, 0.3);
     border-radius: 10px;
     overflow: hidden;
-    max-width: 24vw;
-    min-width: 24vw;
+    max-width: 500px;
+    min-width: 500px;
     margin-bottom: 20px;
     background: white;
     animation: SlideLeft 0.5s;
@@ -19,27 +20,31 @@
 
 @keyframes SlideLeft {
     0% {
-        margin-top: -120%;
+        margin-left: 120%;
     }
 
     100% {
-        margin-top: 0;
+        margin-left: 0;
     }
 }
 
 @keyframes SlideRight {
     0% {
-        margin-top: 0;
+        margin-left: 0;
     }
 
     100% {
-        margin-top: -120%;
+        margin-left: 120%;
     }
 }
 
 .notification.exit {
     animation: SlideRight 0.4s;
     animation-fill-mode: forwards;
+}
+
+.notification.exit::parent {
+    height: 0%;
 }
 
 .notification p, .notification h1 {

@@ -3,6 +3,8 @@ import {useDropzone} from 'react-dropzone';
 import './styles.css';
 import AuthContext from '../../contexts/AuthContext';
 import cameraIcon from '../../assets/images/icons/camera.svg';
+import NotificationContext from '../../contexts/NotificationContext';
+import { v4 } from 'uuid';
 
 interface Props {
     onFileUpload: (file: File) => void;
@@ -11,16 +13,33 @@ interface Props {
 const Dropzone: React.FC<Props> = ({ onFileUpload }) => {
     const [selectedFileUrl, setSelectedFileUrl] = useState('');
     const { user } = useContext(AuthContext);
+    const dispatch = useContext(NotificationContext);
 
     const onDrop = useCallback(acceptedFiles => {
         console.log(acceptedFiles[0]);
         if (acceptedFiles[0] === undefined) return;
         if (acceptedFiles[0].size > 5 * 1000 * 1000) {
-            alert('File too large! (higher than 5 Mb)');
+            dispatch({
+                type: "ADD_NOTIFICATION",
+                payload: {
+                    type: 'ERROR',
+                    message: 'The image you tried to upload is too large (higher than 5mb)!',
+                    title: 'File size too large.',
+                    id: v4(),
+                }
+            });
             return;
         }
-        if (!/jpeg|jpg|png|gif|jfif/.test(acceptedFiles[0].type)) {
-            alert('Invalid image type');
+        if (!/jpeg|jpg|png|jfif/.test(acceptedFiles[0].type)) {
+            dispatch({
+                type: "ADD_NOTIFICATION",
+                payload: {
+                    type: 'ERROR',
+                    message: 'Try uploading the image as: .jpeg, .jpg, .png or .jfif',
+                    title: 'Invalid image type.',
+                    id: v4(),
+                }
+            });
             return;
         }
         

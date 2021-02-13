@@ -44,7 +44,7 @@ export default function Profile() {
         setFirstName(name[0]);
         name.shift();
         setLastName(name.join(' '));
-    }
+    };
 
     useEffect(() => {
         let isMounted = true;

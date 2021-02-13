@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 
 import { Route, Redirect } from 'react-router-dom';
-import PageHeader from '../PageHeader';
 import AuthContext from '../../contexts/AuthContext';
+import NotificationContext from '../../contexts/NotificationContext';
+import { v4 } from 'uuid';
+import LoadingScreen from '../../pages/LoadingPublic';
 
 const PublicRoute: React.FC<any> = ({ component: Component, ...rest }) => {
     const { authenticated, loading, verifyAuthentication } = useContext(AuthContext);
     const [currentAuth, setCurrentAuth] = useState(authenticated);
     const [currentLoad, setCurrentLoad] = useState(loading);
+    const dispatch = useContext(NotificationContext);
 
     const verify = useCallback(async () => {
         if (currentLoad) if (!currentAuth) {
@@ -15,6 +18,17 @@ const PublicRoute: React.FC<any> = ({ component: Component, ...rest }) => {
                 //console.log(Boolean(bool))
                 return Boolean(bool);// returns true/false
             }).catch(error => {
+                if (error.response === undefined) {
+                    dispatch({
+                        type: "ADD_NOTIFICATION",
+                        payload: {
+                            type: 'ERROR',
+                            message: "It appears that we can't connect to our server. Check if your internet connection is stable or check our social media to see any scheduled maintenance. ",
+                            title: 'Something went wrong.',
+                            id: v4(),
+                        }
+                    });
+                }
                 return false;
             });
             setCurrentLoad(false);
@@ -41,7 +55,7 @@ const PublicRoute: React.FC<any> = ({ component: Component, ...rest }) => {
                     }}
                 />
             ) : currentLoad ? (
-                <div id="page-teacher-form" className="container"><PageHeader title=" " description=" " /></div>
+                LoadingScreen()
             ) : (
                         <Component {...props} />
                     )}

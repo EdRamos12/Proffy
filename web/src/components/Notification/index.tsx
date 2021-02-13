@@ -39,7 +39,7 @@ const NotificationComponent: React.FC<NotificationProps> = (props) => {
                 type: "REMOVE_NOTIFICATION",
                 id: props.id
             })
-        }, 400)
+        }, 350)
     }
 
     useEffect(() => {

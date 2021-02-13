@@ -20,7 +20,7 @@ export default function Login() {
         const response = await signIn(email, password, rememberMe);
         if (response)
             history.push('/home');
-        else 
+        else
             setError('Invalid login');
     }
 

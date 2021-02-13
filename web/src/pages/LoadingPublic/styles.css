@@ -1,0 +1,18 @@
+.loading-background {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../../assets/images/profile-background.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    flex-direction: column;
+}
+
+.loading-container {
+    height: 100%;
+    width: 100%;
+    background: var(--color-primary);
+}

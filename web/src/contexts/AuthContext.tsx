@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from 'react';
+import React, { createContext, useState, useCallback, useContext } from 'react';
 import api from '../services/api';
 import { useHistory } from 'react-router-dom';
 
@@ -58,6 +58,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     async function verifyAuthentication() {
         const info = await api.get('/verify', { withCredentials: true });
+        console.log(info);
         try {
             setLoading(false);
             setUser(info.data);
@@ -68,6 +69,7 @@ export const AuthProvider: React.FC = ({ children }) => {
                 return true;
             }
             else {
+                console.log(err);
                 setUser(null);
             }
             return false;
