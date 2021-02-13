@@ -100,6 +100,8 @@ routes.post('/classes', authMiddleware, classesController.create);
 
 routes.get('/total_classes', authMiddleware, classesController.total);
 
+routes.get('/total_classes/user/:user_id', authMiddleware, classesController.total_from_user);
+
 routes.get('/classes', classesListingLimiter, authMiddleware, classesController.index);
 
 routes.delete('/classes/:id', authMiddleware, classesController.delete);
@@ -114,7 +116,7 @@ routes.post('/classes/:class_id/comment', authMiddleware, celebrate({
     [Segments.BODY]: Joi.object().keys({
         content: Joi.string().required() //comment itself
     })
-}), classCommentsController.create);
+}, {abortEarly: false}), classCommentsController.create);
 
 routes.get('/classes/:class_id/comment', classCommentsController.index);
 

@@ -54,7 +54,6 @@
 }
 
 #login-form span {
-    margin: 2.4rem 0;
     display: block;
     color: #E33D3D;
 }
@@ -131,29 +130,66 @@ label[for="remember_me"] {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    line-height: 24px;
     color: #9C98A6;
+    padding-left: 25px;
+    margin-left: -20px;
 }
 
-/* #remember-me {
-    display: inline-block;
-    background: var(--color-box-footer);
-    border: 1px solid var(--color-line-in-white);
-    box-sizing: border-box;
-    border-radius: 8px;
-    width: 24px;
-    height: 24px;
-    font-size: 22px;
-} */
-
-/* input[name="remember_me"] {
+input[type=checkbox] { 
     display: none;
-} */
+} 
+
+#remember-me { 
+    height: 20px; 
+    width: 20px; 
+    background-color: white; 
+    border-radius: 5px;
+    transition: background-color .2s ease;
+    border: 1px solid var(--color-line-in-white);
+} 
+  
+#login-bottom div {
+    display: flex;
+}
+
+#login-bottom div:hover input ~ #remember-me { 
+    background-color: var(--color-primary-lighter); 
+} 
+
+#login-bottom div input:active ~ #remember-me { 
+    background-color: var(--color-primary-darker); 
+} 
+  
+#login-bottom div input:checked ~ #remember-me { 
+    background-color: var(--color-primary);
+} 
+  
+#remember-me:after { 
+    content: ""; 
+    position: absolute; 
+    display: none; 
+} 
+
+#login-bottom div input:checked ~ #remember-me:after { 
+    display: block; 
+} 
+
+#remember-me:after { 
+    width: 3px;
+    height: 8px;
+    margin: 2px 5.5px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    z-index: 300;
+    -webkit-transform: rotate(45deg); 
+    -ms-transform: rotate(45deg); 
+    transform: rotate(45deg); 
+    pointer-events: none;
+} 
 
 #login-form fieldset {
     border: none;
     width: 100%;
-    /*display: flex;*/
 }
 
 #login-form fieldset .input-block input {

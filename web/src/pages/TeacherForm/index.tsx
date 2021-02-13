@@ -10,6 +10,8 @@ import AuthContext from '../../contexts/AuthContext';
 import SuccessContainer from '../../components/SuccessContainer';
 import RocketIcon from '../../assets/images/icons/rocket.svg';
 import { Link } from 'react-router-dom';
+import NotificationContext from '../../contexts/NotificationContext';
+import { v4 } from 'uuid';
 
 function TeacherForm() {
     const { user } = useContext(AuthContext);
@@ -19,6 +21,7 @@ function TeacherForm() {
     const [cost, setCost] = useState('');
     const [success, setSuccess] = useState(false);
     const [scheduleItems, setScheduleItems] = useState([{ week_day: 0, from: '', to: '' }]);
+    const dispatch = useContext(NotificationContext);
 
     function addNewScheduleItem() {
         setScheduleItems([
@@ -44,7 +47,15 @@ function TeacherForm() {
             const newSchedule = scheduleItems.slice(0, index).concat(scheduleItems.slice(index + 1, scheduleItems.length));
             setScheduleItems(newSchedule);
         } else {
-            alert('You should have at least one schedule to your class!');
+            dispatch({
+                type: "ADD_NOTIFICATION",
+                payload: {
+                    type: 'ERROR',
+                    message: 'You should have at least one schedule to your class!',
+                    title: 'Something went wrong.',
+                    id: v4(),
+                }
+            });
         }
     }
 
@@ -58,7 +69,16 @@ function TeacherForm() {
         }, {withCredentials: true}).then(() => {
             setSuccess(true);
         }).catch((err) => {
-            alert('Something went wrong! Check log for more details \n '+err);
+            dispatch({
+                type: "ADD_NOTIFICATION",
+                payload: {
+                    type: 'ERROR',
+                    message: 'Check console dev for more details. Contact us if possible: '+err,
+                    title: 'Something went wrong.',
+                    id: v4(),
+                }
+            });
+            //alert('Something went wrong! Check log for more details \n '+err);
             console.error(err);
         });
     }

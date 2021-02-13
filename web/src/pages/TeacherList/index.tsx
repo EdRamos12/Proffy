@@ -69,6 +69,7 @@ const TeacherList = () => {
             //initial page load
             setLoading(true);
         }
+        console.log('wadu')
     }, [storedPosts, storedPage, teachers]);
 
     // TODO: Maker another algorithm to cancel search
@@ -90,7 +91,6 @@ const TeacherList = () => {
         api.get('/total_classes', { withCredentials: true }).then((info) => {
             setTotalClasses(info.data.total);
         });
-        console.log('aah')
         checkChunkedPosts();
 
         function handleScroll() {
@@ -148,14 +148,13 @@ const TeacherList = () => {
         setLoading(false);
         setTotal(response.headers['x-total-count']);
         chunkInfo(page, [...teachers, ...response.data]);
-        console.log(page);
         return;
     }, [limitReached, search, subject, time, week_day, page, teachers, total, chunkInfo]);
 
     useEffect(() => {
         if (!loading) return;
         loadClasses();
-    }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [loading]);
 
     return (
         <div id="page-teacher-list" className="container">

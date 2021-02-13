@@ -296,6 +296,16 @@ export default class ClassesController {
         return rsp.json({ total });
     }
 
+    async total_from_user(rq: Request, rsp: Response) {
+        const { user_id } = rq.params;
+        
+        const totalClasses = await db('classes').where('user_id', '=', user_id).count('* as total');
+
+        const { total } = totalClasses[0];
+
+        return rsp.json({ total });
+    }
+
     async index_one(rq: Request, rsp: Response) {
         const { id } = rq.params;
 

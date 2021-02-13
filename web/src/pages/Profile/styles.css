@@ -4,6 +4,12 @@
     max-width: 100vw;
 }
 
+#profile-page > h1 {
+    text-align: center;
+    font: 700 3.6rem Archivo;
+    color: var(--color-text-title);
+}
+
 #profile-page main {
     background: var(--color-box-base);
     width: 100%;
@@ -167,6 +173,23 @@
     line-height: 26px;
 }
 
+#profile-page #class-posts {
+  margin: 3.2rem auto;
+  max-width: 74rem;
+  width: 90%;
+}
+
+#profile-page #class-posts #limit-message {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  margin-top: 4rem;
+}
+
+#profile-page #class-posts .teacher-item {
+    border: none;
+}
+
 #not-found {
     position: fixed;
     width: 100vw;
@@ -176,5 +199,5 @@
     align-items: center;
     flex-direction: column;
     background: white;
-    z-index: 1;
+    z-index: 1827;
 }

@@ -86,7 +86,7 @@ Check the list for more details about the project.
 - [x] Profile pages
 - [x] Infinite scroll for classes
 - [x] Update classes index
-- [ ] Show classes from user on their profile
+- [x] Show classes from user on their profile
 - [ ] Delete/Edit own classes
 - [ ] Delete account
 - [ ] Page to see post & comments

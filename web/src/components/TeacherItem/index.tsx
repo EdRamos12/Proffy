@@ -125,8 +125,8 @@ const TeacherItem: React.FC<teacherItemProps> = ({ teacher }) => {
                 type: "ADD_NOTIFICATION",
                 payload: {
                     type: 'SUCCESS',
-                    message: 'Your profile has been successfully updated.',
-                    title: 'Profile updated!',
+                    message: 'Selected class has been deleted. Refreshing the page in a few instants.',
+                    title: 'Class deleted!',
                     id: v4(),
                 }
             });

@@ -62,7 +62,7 @@ export default function Login() {
                         <div id="login-bottom">
                             <div>
                                 <input id="remember_me" name='remember_me' type='checkbox' onChange={(e) => { setRememberMe(e.target.checked) }} />
-                                {/* <span id="remember-me" /> */}
+                                <span id="remember-me" />
                                 <label htmlFor="remember_me"> Remember me</label>
                             </div>
 
