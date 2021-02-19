@@ -5,7 +5,7 @@ import backIcon from '../../assets/images/icons/back.svg'
 import SuccessContainer from '../../components/SuccessContainer';
 import api from '../../services/api';
 
-export default function Reset () {
+export default function Reset() {
     const { token } = useParams() as any;
 
     const [success, setSuccess] = useState(false);
@@ -32,12 +32,10 @@ export default function Reset () {
 
     return (
         <div id="register-page">
-            <div id={( success ? 'register-success' : 'not-show' )}>
-                <SuccessContainer title="Password reset!" button_text="Sign in!">
-                    Your password has been successfully redefined! <br />
-                    You can now log in to the app.
-                </SuccessContainer>
-            </div>
+            <SuccessContainer title="Password reset!" success={success} button_text="Sign in!">
+                Your password has been successfully redefined! <br />
+                 You can now log in to the app.
+            </SuccessContainer>
             <div id="register-page-content">
                 <Link to='/' id="go-back">
                     <img src={backIcon} alt="go back" />
@@ -53,7 +51,7 @@ export default function Reset () {
                         </div>
                         <div className="input-block" id="Password">
                             <label htmlFor="Password-input" id={Boolean(password) ? "active" : ""}>New password</label>
-                            <input required style={{borderRadius: '10px'}} className={Boolean(error) ? "input-error" : ""} type="password" id="Password-input" onChange={(e) => {setPassword(e.target.value)}} />
+                            <input required style={{ borderRadius: '10px' }} className={Boolean(error) ? "input-error" : ""} type="password" id="Password-input" onChange={(e) => { setPassword(e.target.value) }} />
                         </div>
                         <button type="submit" disabled={!Boolean(password)}>
                             Send
@@ -63,7 +61,7 @@ export default function Reset () {
                 <div id="register-bg-container">
                     <div id="register-bg-items-container">
                         <div>
-                            <img src={logoImg} alt="Proffy"/>
+                            <img src={logoImg} alt="Proffy" />
                             <h2>Your online platform <br /> to study.</h2>
                         </div>
                     </div>

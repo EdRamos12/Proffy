@@ -46,12 +46,10 @@ export default function Register() {
 
     return (
         <div id="register-page">
-            <div id={( success ? 'register-success' : 'not-show' )}>
-                <SuccessContainer title="Registered successfully" button_text="Sign in!">
-                    Now, go check your e-mail to get be part of Proffy. <br />
-                    Have a nice experience.
-                </SuccessContainer>
-            </div>
+            <SuccessContainer title="Registered successfully" success={success} button_text="Sign in!">
+                Now, go check your e-mail to get be part of Proffy. <br />
+                Have a nice experience.
+            </SuccessContainer>
             <div id="register-page-content">
                 <Link to='/' id="go-back">
                     <img src={backIcon} alt="go back" />

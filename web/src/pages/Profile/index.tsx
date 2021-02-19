@@ -13,6 +13,8 @@ import NotificationContext from '../../contexts/NotificationContext';
 import { v4 } from 'uuid';
 import TeacherItem, { Teacher } from '../../components/TeacherItem';
 import PostStorage from '../../contexts/PostStorage';
+import Cleave from 'cleave.js/react';
+import 'cleave.js/dist/addons/cleave-phone.br';
 
 interface User {
     avatar: string;
@@ -46,7 +48,6 @@ export default function Profile() {
     const [teachers, setTeachers] = useState([]); // posts
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
-    const [totalClasses, setTotalClasses] = useState('.....');
     const [loading, setLoading] = useState(false);
     // no more posts to load
     const [limitReached, setLimitReached] = useState(false);
@@ -93,12 +94,13 @@ export default function Profile() {
     useEffect(() => {
         setWhatsapp(String(userProfile.whatsapp));
         setBio(String(userProfile.bio));
+        console.log(userProfile.whatsapp);
     }, [userProfile]);
 
     useEffect(() => {
-        api.get(`/total_classes/user/${id}`, { withCredentials: true }).then((info) => {
-            setTotalClasses(info.data.total);
-        });
+        // api.get(`/total_classes/user/${id}`, { withCredentials: true }).then((info) => {
+        //     setTotalClasses(info.data.total);
+        // });
         checkChunkedPosts();
 
         function handleScroll() {
@@ -155,7 +157,7 @@ export default function Profile() {
 
         data.append('name', name);
         data.append('bio', bio);
-        data.append('whatsapp', whatsapp);
+        data.append('whatsapp', whatsapp.replaceAll(' ', ''));
         if (selectedFile) {
             data.append('avatar', selectedFile);
         }
@@ -200,7 +202,7 @@ export default function Profile() {
     return (
         <div id="profile-page" className="container">
             <div id="percentage" style={{ width: uploadProgress + '%' }} />
-            <div id={deleted ? "not-found" : "not-show"}><h1 style={{ fontSize: '15vw' }}>404</h1><h1 style={{ textAlign: 'center' }}>Page not found.</h1></div>
+            {deleted && <div id="not-found"><h1 style={{ fontSize: '15vw' }}>404</h1><h1 style={{ textAlign: 'center' }}>Page not found.</h1></div>}
 
             <PageHeader background={profileBackground} page={canEdit ? 'My profile' : userProfile.name}>
                 <div className="profile">
@@ -217,16 +219,25 @@ export default function Profile() {
                         <div id="profile-name">
                             <Input onChange={(e) => { setFirstName(e.target.value) }} label="First name" name="first-name" defaultValue={firstName} readOnly={!canEdit} />
                             <Input onChange={(e) => { setLastName(e.target.value) }} label="Last name" name="last-name" defaultValue={lastName} readOnly={!canEdit} />
-                            {canEdit ? "" : (<Input label="Whatsapp" readOnly name="whatsapp" defaultValue={whatsapp === 'null' ? '' : whatsapp === 'undefined' ? '' : whatsapp} onChange={addSpaces} />)}
+                            {!canEdit && <Input label="Whatsapp" readOnly name="whatsapp" defaultValue={whatsapp === 'null' ? '' : whatsapp === 'undefined' ? '' : whatsapp} onChange={addSpaces} />}
                         </div>
                         <div id={canEdit ? "profile-communication" : "not-show"}>
                             <Input label="E-mail" name="e-mail" type="email" readOnly defaultValue={userProfile.email} />
-                            <Input onChange={(e) => { setWhatsapp(e.target.value) }} label="Whatsapp" name="whatsapp" defaultValue={whatsapp === 'null' ? '' : whatsapp === 'undefined' ? '' : whatsapp} />
+                            {/* <Input defaultValue={whatsapp === 'null' ? '' : whatsapp === 'undefined' ? '' : whatsapp} /> */}
+                            <div className="input-block" id="Whatsapp">
+                                <label htmlFor="whatsapp">Whatsapp</label>
+                                <Cleave id="whatsapp"
+                                    value={whatsapp}
+                                    required
+                                    onChange={(e) => { setWhatsapp(e.target.value) }}
+                                    options={{ prefix: '+55', phone: true, phoneRegionCode: 'BR' }}
+                                />
+                            </div>
                         </div>
                         <Textarea onChange={(e) => { setBio(e.target.value) }} label="Biography" readOnly={!canEdit} name="bio" desc={canEdit ? "(Max. 300 characters)" : ""} defaultValue={bio === 'null' ? '' : bio === 'undefined' ? '' : bio} />
                     </fieldset>
 
-                    {canEdit ? (
+                    {canEdit &&
                         <footer>
                             <p><img src={warningIcon} alt="Important warning" />
                             Important <br />
@@ -235,7 +246,7 @@ export default function Profile() {
                                 Change profile!
                             </button>
                         </footer>
-                    ) : ""}
+                    }
                 </form>
             </main>
 

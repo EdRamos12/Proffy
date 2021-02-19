@@ -29,12 +29,12 @@ export default function Forgot () {
 
     return (
         <div id="register-page">
-            <div id={( success ? 'register-success' : 'not-show' )}>
-                <SuccessContainer title="Redefinition sent!" button_text="Sign in!">
+            {success && <div id='register-success'>
+                <SuccessContainer title="Redefinition sent!" success={success} button_text="Sign in!">
                     Instructions have been sent to your e-mail. <br />
                     The token expires in 1 hour.
                 </SuccessContainer>
-            </div>
+            </div>}
             <div id="register-page-content">
                 <Link to='/' id="go-back">
                     <img src={backIcon} alt="go back" />

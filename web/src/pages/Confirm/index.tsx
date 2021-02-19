@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import { v4 } from 'uuid';
 import NotificationContext from '../../contexts/NotificationContext';
+import LoadingScreen from '../LoadingPublic';
 
 
 export default function Confirm() {
@@ -38,7 +39,5 @@ export default function Confirm() {
         })();
     }, [token, history])
 
-    return (
-        <div></div>
-    );
+    return LoadingScreen();
 }

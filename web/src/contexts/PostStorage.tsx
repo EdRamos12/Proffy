@@ -25,8 +25,11 @@ interface PostStorageData {
     storedPage: number;
     chunkInfo: (page: number, data: Post[]) => void;
     storedProfilePosts: any;
-    setStoredProfilePosts: any;
     chunkProfilePostsInfo: (page: number, data: Post[], id: number) => void;
+}
+
+declare global {
+    interface Window { stored_posts: any; }
 }
 
 const PostStorage = createContext<PostStorageData>({} as PostStorageData);
@@ -45,18 +48,13 @@ export const PostStorageProvider: React.FC = ({ children }) => {
     }
 
     function chunkProfilePostsInfo(page: number, teacher: Post[], user_id: number) {
-        // if (storedProfilePosts[id] === undefined) {
-            
-        // } else {
-            
-        // }
-        // console.log(teacher, storedProfilePosts[user_id]);
         setStoredProfilePosts((prev: any) => {
             return {...prev, [user_id]: {page, teacher}};
         });
+        window.stored_posts = {main: storedPosts, profiles: storedProfilePosts};
     }
 
-    return <PostStorage.Provider value={{ storedPosts, storedPage, chunkInfo, storedProfilePosts, setStoredProfilePosts, chunkProfilePostsInfo }} >
+    return <PostStorage.Provider value={{ storedPosts, storedPage, chunkInfo, storedProfilePosts, chunkProfilePostsInfo }} >
         {children}
     </PostStorage.Provider>
 };
