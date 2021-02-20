@@ -1,3 +1,15 @@
+#register-success {
+    position: fixed;
+    display: flex;
+    z-index: 12938273;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-primary);
+    align-items: center;
+    justify-content: center;
+    padding: 12rem 16rem;
+}
+
 #success-content a {
     margin: 4rem 0;
     margin-top: 8rem;

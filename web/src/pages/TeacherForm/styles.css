@@ -195,6 +195,7 @@
     width: 8rem;
     border-radius: 25%;
     margin-right: 2.4rem;
+    transition: box-shadow .2s ease; 
 }
 
 .profile-and-whatsapp .profile h2 {
@@ -204,6 +205,23 @@
     color: var(--color-text-title);
     font-size: 20px;
     line-height: 25px;
+    transition: text-shadow .1s ease;
+}
+
+.profile-and-whatsapp .profile a {
+    transition: transform .1s ease; 
+}
+
+.profile-and-whatsapp .profile a:hover {
+    transform: scale(1.02);
+}
+
+.profile-and-whatsapp .profile a:hover h2 {
+    text-shadow: 0px 0px 5px rgba(0,0,0,.3);
+}
+
+.profile-and-whatsapp .profile a:hover img {
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,.75);
 }
 
 

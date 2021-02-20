@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import Forgot from './pages/Forgot';
 import Confirm from './pages/Confirm';
 import Reset from './pages/Reset';
+import ClassPage from './pages/ClassPage';
 
 export default function Routes() {
     return (
@@ -20,11 +21,17 @@ export default function Routes() {
             <PrivateRoute path="/give-classes" exact component={TeacherForm} />
             <PrivateRoute path="/profile/:id" component={Profile} />
             <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/class/:id" component={ClassPage} />
             <PublicRoute path="/register" exact component={Register} />
             <PublicRoute path="/forgot-password" exact component={Forgot} />
             <PublicRoute path="/confirm/:token" component={Confirm} />
             <PublicRoute path="/reset-password/:token" component={Reset} />
             <PublicRoute path="/" exact component={Login} />
+            <Route path="/class" component={() => (
+                <Redirect
+                    to={{pathname: '/',}}
+                />
+            )} />
             <Route path="/confirm" component={() => (
                 <Redirect
                     to={{pathname: '/',}}

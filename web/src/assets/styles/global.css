@@ -64,18 +64,6 @@ textarea {
   transition: width .2s ease;
 }
 
-#register-success {
-  position: fixed;
-  display: flex;
-  z-index: 1;
-  width: 100vw;
-  height: 100vh;
-  background: var(--color-primary);
-  align-items: center;
-  justify-content: center;
-  padding: 12rem 16rem;
-}
-
 .input-error {
   border: 1px #E33D3D solid !important;
 }

@@ -57,7 +57,7 @@ const TeacherList = () => {
             //console.log('is it?', teachers);
         } else {
             if (window.location.search) {
-                console.log('about that')
+                //console.log('about that')
                 const params = paramsToObject(window.location.search);
                 if (!!params.subject && !!params.week_day && !!params.time) {
                     setSubject(params.subject.replace('%20', ' '));
@@ -69,7 +69,6 @@ const TeacherList = () => {
             //initial page load
             setLoading(true);
         }
-        console.log('wadu')
     }, [storedPosts, storedPage, teachers]);
 
     // TODO: Maker another algorithm to cancel search

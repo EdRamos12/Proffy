@@ -58,7 +58,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     async function verifyAuthentication() {
         const info = await api.get('/verify', { withCredentials: true });
-        console.log(info);
         try {
             setLoading(false);
             setUser(info.data);

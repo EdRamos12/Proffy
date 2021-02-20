@@ -12,6 +12,7 @@ import RocketIcon from '../../assets/images/icons/rocket.svg';
 import { Link } from 'react-router-dom';
 import NotificationContext from '../../contexts/NotificationContext';
 import { v4 } from 'uuid';
+import Cleave from 'cleave.js/react';
 
 function TeacherForm() {
     const { user } = useContext(AuthContext);
@@ -64,7 +65,7 @@ function TeacherForm() {
 
         api.post('/classes', {
             subject,
-            cost: Number(cost),
+            cost: cost,
             schedule: scheduleItems
         }, {withCredentials: true}).then(() => {
             setSuccess(true);
@@ -90,12 +91,10 @@ function TeacherForm() {
 
     return (
         <div id="page-teacher-form" className="container">
-            <div id={( success ? 'register-success' : 'not-show' )}>
-                <SuccessContainer title="Registration saved!" button_text="Return home">
-                    All right, your registration is on our list of teachers. <br />
-                    Now just keep an eye on your WhatsApp. 😉
-                </SuccessContainer>
-            </div>
+            <SuccessContainer success={success} title="Registration saved!" button_text="Return home">
+                All right, your registration is on our list of teachers. <br />
+                Now just keep an eye on your WhatsApp. 😉
+            </SuccessContainer>
             
             <PageHeader page="Give classes" info='Get ready! it will be amazing.' icon={RocketIcon} title="How amazing that you want to teach." description="The first step is to fill this subscription form."/>
 
@@ -107,7 +106,9 @@ function TeacherForm() {
                         
                         <div className="profile-and-whatsapp">
                             <div className="profile">
-                                <img src={user?.avatar} alt="Avatar"/>
+                                <Link to={`/profile/${user?.id}`}>
+                                    <img src={user?.avatar} alt="Avatar"/>
+                                </Link>
                                 <Link style={{textDecoration: 'none'}} to={`/profile/${user?.id}`}>
                                     <h2>{user?.name}</h2>
                                 </Link>
@@ -136,9 +137,20 @@ function TeacherForm() {
                                 { value: 'Philosophy', label: 'Philosophy' },
                                 { value: 'Sociology', label: 'Sociology' },
                             ]} />
-                            <Input required style={{paddingLeft: '3.4rem'}} name="cost" type="number" label="Class's cost per hour" value={cost} onChange={(e) => {setCost(e.target.value)}}>
+                            {/* <Cleave name="" label=""  }}>
+                                
+                            </Cleave> */}
+                            <div className="input-block" id="Class's cost per hour">
+                                <label htmlFor="cost">Class's cost per hour</label>
+                                <Cleave id="cost"
+                                    value={cost}
+                                    required 
+                                    style={{paddingLeft: '3.4rem'}}
+                                    onChange={(e) => {setCost(e.target.value)}}
+                                    options={{ numeral: true, numeralThousandsGroupStyle: 'thousand' }}
+                                />
                                 <span id="currency-span">$</span>
-                            </Input>
+                            </div>
                         </div>
 
                     </fieldset>
@@ -160,9 +172,9 @@ function TeacherForm() {
                                     ]} />
                                     <Input required value={scheduleItem.from} onChange={(e) => {setScheduleItemValue(index, 'from', e.target.value)}} name="from" label="From" type="time"/>
                                     <Input required value={scheduleItem.to} onChange={(e) => {setScheduleItemValue(index, 'to', e.target.value)}} name="to" label="To" type="time"/>
-                                    <div className="delete-container" id={scheduleItems.length > 1 ? '' : 'not-show'}>
+                                    {scheduleItems.length > 1 && <div className="delete-container">
                                         <button id="delete-item" type="button" onClick={(e) => deleteScheduleItem(index)}>Delete schedule</button>
-                                    </div>
+                                    </div>}
                                 </div>
                             );
                         })}

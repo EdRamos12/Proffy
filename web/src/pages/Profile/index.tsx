@@ -71,6 +71,7 @@ export default function Profile() {
         }
     }, [storedProfilePosts, teachers]);
 
+    // loading actual profile
     useEffect(() => {
         let isMounted = true;
         if (Number(user?.id) === Number(id)) {
