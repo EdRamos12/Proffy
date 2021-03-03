@@ -14,7 +14,7 @@ export default class ClassesController {
         const filters = rq.query;
         const [count] = await db('classes').count(); 
         const { page = 1 } = rq.query; 
-        const limit = 10;
+        const limit = 5;
         const offset = (Number(page) - 1) * limit;
 
         if (offset < 0) {
@@ -22,12 +22,12 @@ export default class ClassesController {
         }
         if (filters.user_id) {
             
-            const classes_items = (await db('classes')
+            const classes_items = await db('classes')
                 .join('users', 'classes.user_id', '=', 'users.id')
                 .join('profile', 'classes.user_id', '=', 'profile.user_id')
                 .orderBy('id', 'desc').limit(limit).offset(offset)
                 .where('classes.user_id', '=', Number(filters.user_id))
-                .select('classes.*', 'users.name', 'users.id as user_id', 'profile.avatar', 'profile.whatsapp', 'profile.bio')).reverse();
+                .select('classes.*', 'users.name', 'users.id as user_id', 'profile.avatar', 'profile.whatsapp', 'profile.bio');
 
             let [total] = await db('classes').where('classes.user_id', '=', Number(filters.user_id)).count();
 

@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
 	credentials: true,
-	origin: host,
+	//origin: host,
 	exposedHeaders: ['X-Total-Count'],
 }));
 app.use('/api/v2', routes);
